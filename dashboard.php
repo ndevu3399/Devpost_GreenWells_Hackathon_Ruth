@@ -2,6 +2,7 @@
 session_start();
 require_once 'config.php';
 
+// Security: Redirect to login if not logged in
 if(!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -11,10 +12,9 @@ $firstname = $_SESSION['firstname'];
 $email = $_SESSION['email'];
 $companyname = $_SESSION['companyname'];
 
+// Get first letter for avatar
 $avatar_letter = strtoupper(substr($firstname, 0, 1));
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,8 +25,7 @@ $avatar_letter = strtoupper(substr($firstname, 0, 1));
     <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-    <!--- Sidebar --->
-  <div class="sidebar">
+    <div class="sidebar">
         <div class="logo-section">
             <div class="logo">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -36,7 +35,7 @@ $avatar_letter = strtoupper(substr($firstname, 0, 1));
                 <span>GasConnect</span>
             </div>
         </div>
-   <div class="nav-section">
+        <div class="nav-section">
             <a href="dashboard.php" class="nav-item active">
                 <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 0 24 24" width="22px" fill="currentColor">
                     <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
@@ -71,7 +70,6 @@ $avatar_letter = strtoupper(substr($firstname, 0, 1));
         </div>
     </div>
 
-<!-- Main Content -->
     <div class="main-content">
         <div class="top-bar">
             <h1>Dashboard</h1>
@@ -83,11 +81,13 @@ $avatar_letter = strtoupper(substr($firstname, 0, 1));
                 </div>
             </div>
         </div>
-    <div class="welcome-section">
+
+        <div class="welcome-section">
             <h2>Welcome back, <?php echo htmlspecialchars($firstname); ?>! 👋</h2>
             <p>Manage your gas orders, track deliveries, and view invoices all in one place.</p>
         </div>
-    <div class="dashboard-grid">
+
+        <div class="dashboard-grid">
             <a href="place_order.php" class="dashboard-card">
                 <div class="card-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -98,7 +98,7 @@ $avatar_letter = strtoupper(substr($firstname, 0, 1));
                 <p>Order gas cylinders and supplies for your business</p>
             </a>
 
-            <a href="#" class="dashboard-card">
+            <a href="track_order.php" class="dashboard-card">
                 <div class="card-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M18 18.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zm1.5-9H17V12h4.46L19.5 9.5zM6 18.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM20 8l3 4v5h-2c0 1.66-1.34 3-3 3s-3-1.34-3-3H9c0 1.66-1.34 3-3 3s-3-1.34-3-3H1V6c0-1.11.89-2 2-2h14v4h3zM3 6v9h.76c.55-.61 1.35-1 2.24-1 .89 0 1.69.39 2.24 1H15V6H3z"/>
@@ -119,7 +119,5 @@ $avatar_letter = strtoupper(substr($firstname, 0, 1));
             </a>
         </div>
     </div>
-
-
 </body>
 </html>
